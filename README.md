@@ -1,5 +1,7 @@
 # vue-init
 
+First steps into Vue.js
+
 ## Project setup
 ```
 npm install
