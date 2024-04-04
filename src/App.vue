@@ -5,17 +5,31 @@
     <Button text="Message" color="lightgreen" />
     <Button text="PBs" color="orange" />
   </div>
+  <NewPost
+    @new-post="newPost"/>
   <Notifications
     @delete-notification="deleteNotification"
     @toggle-unchecked="toggleUnchecked"
     :notifications="notifications" />
-</template> 
+  <Posts
+    :posts="posts" />
+  <Footer
+    :posts="posts" />
+</template>
 
 <script>
 import Header from './components/Header'
 import Button from './components/Button'
 import AddButton from './components/AddButton'
 import Notifications from './components/Notifications'
+import NewPost from './components/NewPost'
+import Posts from './components/Posts'
+import Footer from './components/Footer'
+
+import artistic_portrait from '@/assets/Artistic_portrait.jpeg'
+import subbaImg from '@/assets/Subba.jpeg'
+import CV1flip from '@/assets/CV1flip.jpg'
+import e60 from '@/assets/E60.jpeg'
 
 export default {
   name: 'App',
@@ -24,13 +38,20 @@ export default {
     Button,
     AddButton,
     Notifications,
+    NewPost,
+    Posts,
+    Footer,
   },
   data() {
     return {
-      notifications: []
+      notifications: [],
+      posts: [],
     }
   },
   methods: {
+    newPost(post) {
+      this.posts = [...this.posts, post]
+    },
     deleteNotification(id) {
       if (confirm("Delete notification?")) {
         this.notifications = this.notifications.filter((notification) => notification.id !== id)
@@ -72,6 +93,36 @@ export default {
         text: "Your friend X just broke his PB!!",
         date: "March 19th at 13.15",
         unchecked: false,
+      },
+    ],
+    this.posts = [
+      {
+        id: 1,
+        type: "New PR",
+        image: artistic_portrait,
+        date: "March 19th at 11.30",
+        caption: "BESST YET",
+      },
+      {
+        id: 2,
+        type: "Crazy Lift",
+        image: subbaImg,
+        date: "March 19th at 11.30",
+        caption: "La virgen",
+      },
+      {
+        id: 3,
+        type: "Meeting",
+        image: CV1flip,
+        date: "March 19th at 11.30",
+        caption: "Mis broders",
+      },
+      {
+        id: 4,
+        type: "Meeting",
+        image: e60,
+        date: "March 19th at 11.30",
+        caption: "Mis sisters",
       },
     ]
   }

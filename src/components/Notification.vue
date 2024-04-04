@@ -29,6 +29,7 @@ export default {
     background: rgb(232, 232, 232);
     margin: 1rem;
     padding: 1rem;
+    cursor: pointer;
 }
 .notification.unchecked {
     border-left: .2rem solid green;
