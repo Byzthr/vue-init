@@ -6,15 +6,19 @@
     <Button text="PBs" color="orange" />
   </div>
   <NewPost
+    v-show="showNewPost"
     @new-post="newPost"/>
   <Notifications
+    v-show="showNotifications"
     @delete-notification="deleteNotification"
     @toggle-unchecked="toggleUnchecked"
     :notifications="notifications" />
   <Posts
     :posts="posts" />
-  <Footer
-    :posts="posts" />
+  <Footer 
+    @toProfile="toProfile"
+    @toNotifications="toNotifications"
+    @toNewPost="toNewPost"/>
 </template>
 
 <script>
@@ -46,9 +50,23 @@ export default {
     return {
       notifications: [],
       posts: [],
+      showNotifications: false,
+      showNewPost: false,
     }
   },
   methods: {
+    toProfile() {
+      this.showNotifications = false
+      this.showNewPost = false
+    },
+    toNotifications() {
+      this.showNotifications = true
+      this.showNewPost = false
+    },
+    toNewPost() {
+      this.showNotifications = false
+      this.showNewPost = true
+    },
     newPost(post) {
       this.posts = [...this.posts, post]
     },
