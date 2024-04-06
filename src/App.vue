@@ -1,7 +1,9 @@
 <template>
   <div class="container">
     <Header desc="The Tamed Team Project"/>
-    <AddButton color="lightblue" />
+    <AddButton
+      :userAdded="addedUser"
+      @addUser="toggleAdded"/>
     <Button text="Message" color="lightgreen" />
     <Button text="PBs" color="orange" />
   </div>
@@ -18,7 +20,7 @@
   <Footer 
     @toProfile="toProfile"
     @toNotifications="toNotifications"
-    @toNewPost="toNewPost"/>
+    @toNewPost="toNewPost" />
 </template>
 
 <script>
@@ -50,11 +52,15 @@ export default {
     return {
       notifications: [],
       posts: [],
+      addedUser: false,
       showNotifications: false,
       showNewPost: false,
     }
   },
   methods: {
+    toggleAdded() {
+      this.addedUser = !this.addedUser
+    },
     toProfile() {
       this.showNotifications = false
       this.showNewPost = false
