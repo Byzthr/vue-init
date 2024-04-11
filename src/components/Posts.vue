@@ -20,6 +20,7 @@ export default {
 
 <style>
 .posts {
+    max-width: 500px;
     display: grid;
     grid-template-columns: 33% 33% 33%;
     column-gap: .5%;

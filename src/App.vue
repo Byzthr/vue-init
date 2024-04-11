@@ -21,6 +21,7 @@
     @toProfile="toProfile"
     @toNotifications="toNotifications"
     @toNewPost="toNewPost" />
+  <div class="bottom-space"></div>
 </template>
 
 <script>
@@ -160,6 +161,9 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   margin-top: 60px;
 }
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400&display=swap');
@@ -172,6 +176,7 @@ export default {
 
 body {
   font-family: 'Poppins', sans-serif;
+  background: #9a9a9a;
 }
 
 .container {
@@ -210,5 +215,9 @@ body {
 .btn-block {
   display: block;
   width: 100%;
+}
+
+.bottom-space {
+  height: 5rem;
 }
 </style>
