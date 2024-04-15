@@ -11,7 +11,11 @@
         </div>
         <div class="form-control">
             <label for="post-image">Photo</label>
-            <input type="image" class="post-media" v-model="image">
+            <input
+                type="file"
+                accept="image/*"
+                class="post-media"
+                @change="uploadImage">
         </div>
         <div class="form-control">
             <label for="post-caption">Caption</label>
@@ -34,6 +38,10 @@ export default {
         }
     },
     methods: {
+        uploadImage(e) {
+            const file = e.target.files[0]
+            this.image = file
+        },
         onSubmit(e) {
             e.preventDefault()
 
@@ -46,7 +54,8 @@ export default {
                 id: Math.floor(Math.random() * 100000),
                 type: this.type,
                 caption: this.caption,
-                image: this.image,
+                // image: this.image,
+                image: "E60.jpeg",
                 date: Date.now()
             }
             this.$emit("newPost", newPost)

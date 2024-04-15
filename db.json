@@ -1,0 +1,69 @@
+{
+  "posts": [
+    {
+      "id": 1,
+      "type": "New PR",
+      "image": "Artistic_portrait.jpeg",
+      "date": "March 19th at 11.30",
+      "caption": "BESST YET"
+    },
+    {
+      "id": 2,
+      "type": "Crazy Lift",
+      "image": "Subba.jpeg",
+      "date": "March 19th at 11.30",
+      "caption": "La virgen"
+    },
+    {
+      "id": 3,
+      "type": "Meeting",
+      "image": "CV1flip.jpg",
+      "date": "March 19th at 11.30",
+      "caption": "Mis broders"
+    },
+    {
+      "id": 4,
+      "type": "Meeting",
+      "image": "E60.jpeg",
+      "date": "March 19th at 11.30",
+      "caption": "Mis sisters"
+    },
+    {
+      "id": 46372,
+      "type": "meet",
+      "caption": "reaerb",
+      "image": "E60.jpeg",
+      "date": 1713150364881
+    }
+  ],
+  "notifications": [
+    {
+      "id": 1,
+      "type": "New message",
+      "text": "New message from x",
+      "date": "March 19th at 11.30",
+      "unchecked": true
+    },
+    {
+      "id": 2,
+      "type": "New follower",
+      "text": "X startewd following you",
+      "date": "March 19th at 12.30",
+      "unchecked": false
+    },
+    {
+      "id": 3,
+      "type": "New message",
+      "text": "New message from y",
+      "date": "March 19th at 13.00",
+      "unchecked": false
+    },
+    {
+      "id": 4,
+      "type": "New PB",
+      "text": "Your friend X just broke his PB!!",
+      "date": "March 19th at 13.15",
+      "unchecked": false
+    }
+  ]
+}

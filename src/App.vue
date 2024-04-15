@@ -74,9 +74,34 @@ export default {
       this.showNotifications = false
       this.showNewPost = true
     },
-    newPost(post) {
-      this.posts = [...this.posts, post]
+    async newPost(post) {
+      const res = await fetch('api/posts', {
+        method: 'POST',
+        headers: {
+          'Content-type': 'application/json',
+        },
+        body: JSON.stringify(post),
+      })
+      const data = await res.json()
+      this.posts = [...this.posts, data]
     },
+    async fetchPosts() {
+      const res =  await fetch("api/posts")
+      const data = await res.json()
+      return data
+    },
+    async fetchNotifications() {
+      const res =  await fetch("api/notifications")
+
+      const data = await res.json()
+
+      return data
+    },
+
+    newNotification(notification) {
+      this.notifications = [...this.notifications, notification]
+    },
+
     deleteNotification(id) {
       if (confirm("Delete notification?")) {
         this.notifications = this.notifications.filter((notification) => notification.id !== id)
@@ -89,8 +114,10 @@ export default {
         { ...notification, unchecked: !notification.unchecked} : notification)
     }
   },
-  created() {
-    this.notifications = [
+  async created() {
+    this.posts = await this.fetchPosts()
+    this.notifications = await this.fetchNotifications()
+    this.notificationsH = [
       {
         id: 1,
         type: "New message",
@@ -120,7 +147,7 @@ export default {
         unchecked: false,
       },
     ],
-    this.posts = [
+    this.postsH = [
       {
         id: 1,
         type: "New PR",
