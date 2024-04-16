@@ -1,6 +1,6 @@
 <template>
     <div class="post">
-        <img :src="getImageSrc(post)" :alt="post.image">
+        <img :src="getImageSrc(post.image)" :alt="post.image">
         <p><a href="">{{ user }}</a>: {{ post.caption }}</p>
     </div>
 </template>
@@ -13,8 +13,8 @@ export default {
         post: Object,
     },
     methods: {
-        getImageSrc(post) {
-            return require(`@/assets/${post.image}`)
+        getImageSrc(image) {
+            return require(`@/assets/${image}`)
         }
     }
 }

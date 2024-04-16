@@ -1,6 +1,8 @@
 <template>
   <div class="container">
-    <Header desc="The Tamed Team Project"/>
+    <Header
+      v-if="userData"
+      :userData="userData"/>
     <AddButton
       :userAdded="addedUser"
       @addUser="toggleAdded"/>
@@ -8,9 +10,11 @@
     <Button text="PBs" color="orange" />
   </div>
   <NewPost
+   class="container"
     v-show="showNewPost"
     @new-post="newPost"/>
   <Notifications
+   class="container"
     v-show="showNotifications"
     @delete-notification="deleteNotification"
     @toggle-unchecked="toggleUnchecked"
@@ -51,29 +55,23 @@ export default {
   },
   data() {
     return {
+      userData: undefined,
       notifications: [],
       posts: [],
+
       addedUser: false,
+
       showNotifications: false,
       showNewPost: false,
     }
   },
   methods: {
-    toggleAdded() {
-      this.addedUser = !this.addedUser
+    async fetchUserData(userId) {
+      const res = await fetch(`api/users?id=${userId}`)
+      const userData = await res.json()
+      return userData[0]
     },
-    toProfile() {
-      this.showNotifications = false
-      this.showNewPost = false
-    },
-    toNotifications() {
-      this.showNotifications = true
-      this.showNewPost = false
-    },
-    toNewPost() {
-      this.showNotifications = false
-      this.showNewPost = true
-    },
+
     async newPost(post) {
       const res = await fetch('api/posts', {
         method: 'POST',
@@ -112,9 +110,25 @@ export default {
       this.notifications = this.notifications.map((notification) =>
         notification.id === id ?
         { ...notification, unchecked: !notification.unchecked} : notification)
+    },
+    toggleAdded() {
+      this.addedUser = !this.addedUser
+    },
+    toProfile() {
+      this.showNotifications = false
+      this.showNewPost = false
+    },
+    toNotifications() {
+      this.showNotifications = true
+      this.showNewPost = false
+    },
+    toNewPost() {
+      this.showNotifications = false
+      this.showNewPost = true
     }
   },
   async created() {
+    this.userData = await this.fetchUserData(1)
     this.posts = await this.fetchPosts()
     this.notifications = await this.fetchNotifications()
     this.notificationsH = [
@@ -191,7 +205,6 @@ export default {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 60px;
 }
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400&display=swap');
 
@@ -203,18 +216,20 @@ export default {
 
 body {
   font-family: 'Poppins', sans-serif;
-  background: #9a9a9a;
+  background: #fffaf1;
 }
 
 .container {
-  max-width: 500px;
-  margin: 30px auto;
+  width: 100%;
+  /* max-width: 500px; */
+  margin: 0 30px auto;
   overflow: auto;
-  min-height: 300px;
-  border: 1px solid rgb(110, 110, 110);
+  min-height: 20vh;
+  border-bottom: .1vh solid rgb(255, 255, 255);
   padding: 30px;
-  border-radius: 5px;
-  background: rgb(232, 232, 232);
+  /* border-radius: 5px; */
+  box-shadow: rgb(112, 0, 187);
+  background: linear-gradient(rgb(232, 232, 232), rgb(255, 231, 167));
 }
 
 .btn {

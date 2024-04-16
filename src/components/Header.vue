@@ -1,9 +1,11 @@
 <template>
     <header>
-        <img alt="Vue logo" src="../assets/logo_tiempo_200.png">
-        <div>
-            <h1>Tamed Project</h1>
-            <h2>{{ desc }}</h2>
+        <img
+            alt="Profile picture"
+            :src="require(`@/assets/${userData.userPPic}`)">
+        <div class="userBio">
+            <h1>{{ userData.userName }}</h1>
+            <h2>{{ userData.userDesc }}</h2>
         </div>
     </header>
 </template>
@@ -12,16 +14,27 @@
 export default {
     name: 'Header',
     props: {
-        desc: String,
+        userData: Object,
+        // userPPic: File,
     },
+    created() {
+        console.log(this.userData)
+    }
 }
 </script>
 
-<style>
+<style scoped>
 header {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
     margin-bottom: 20px;
+}
+img {
+    border-radius: 50%;
+    max-width: 100px;
+}
+.userBio{
+    margin: 0 2rem;
 }
 </style>
