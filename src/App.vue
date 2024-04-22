@@ -2,7 +2,8 @@
   <div class="container">
     <Header
       v-if="userData"
-      :userData="userData"/>
+      :userData="userData"
+      :userPPic="userPPic"/>
     <AddButton
       :userAdded="addedUser"
       @addUser="toggleAdded"/>
@@ -66,10 +67,13 @@ export default {
     }
   },
   methods: {
-    async fetchUserData(userId) {
-      const res = await fetch(`api/users?id=${userId}`)
-      const userData = await res.json()
-      return userData[0]
+    async fetchUserData(userName) {
+      console.log(`fetchUserData <- ${userName}`)
+      const res = await fetch(`users/${userName}`)
+      const resJson = await res.json()
+      const userData = resJson[0].fields
+      console.log(`fetchUserData -> ${JSON.stringify(userData)}`)
+      return userData
     },
 
     async newPost(post) {
@@ -128,7 +132,8 @@ export default {
     }
   },
   async created() {
-    this.userData = await this.fetchUserData(1)
+    this.userData = await this.fetchUserData('Byzthr')
+    this.userPPic = "CV1flip.jpg"
     this.posts = await this.fetchPosts()
     this.notifications = await this.fetchNotifications()
     this.notificationsH = [
@@ -197,7 +202,7 @@ export default {
 
 <style>
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
+  font-family: Roboto, Montserrat, Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
